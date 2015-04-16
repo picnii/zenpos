@@ -38,7 +38,11 @@ $this->params['breadcrumbs'] =  [
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => 150]) ?>
      <?= $form->field($model, 'tax_number')->textInput(['maxlength' => 150]) ?>
-
+     <?= $form->field($model, 'tax_percent')->input('number') ?>
+    
+      <p>
+        <?= Html::a('จัดการบัตรเครดิต', ['payment-credit/index', 'id' => $brand->id], ['class' => 'btn btn-success']) ?>
+    </p>
     
 
     <div class="form-group">

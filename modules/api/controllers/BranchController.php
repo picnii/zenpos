@@ -9,6 +9,7 @@ use app\models\Brand;
 use app\models\BillInfo;
 use app\models\Branch;
 use app\models\Product;
+use app\models\PaymentCredit;
 use app\models\Inventory;
 use app\models\Sales;
 use app\models\Wholesale;
@@ -120,8 +121,16 @@ class BranchController extends ActiveController
 	    $brand = Brand::findOne($branch->brand_id);
 	    $address = $branch->address;
 	    $bill_info = BillInfo::find()->where(['brand_id' => $branch->brand_id])->one();
-
+	    $credit_cards = PaymentCredit::find()->where(['brand_id' => $branch->brand_id])->one();
 	    
+	    $payments = [];
+	    $payments['tax'] = $bill_info->tax_percent;
+	    $payments['credits'] = [];
+	    foreach ($credit_cards as $key => $value) {
+	    	# code...
+	    	$payments['credits'][] = $value;
+	    }
+
 	    $logo = Url::home(true).'uploads/'.$brand->logo;
 	    return [
 	    	'name'=>$branch->name,
@@ -130,7 +139,7 @@ class BranchController extends ActiveController
 	    	'bill_info' => $bill_info,
 	    	'inventories'=> $this->getProducts($id),
 	    	'manager_password' => $branch->password_manager,
-	    	'tax_percent' => $branch->tax_percent,
+	    	'payments' => $payments,
 	    ];
 	}
 

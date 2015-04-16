@@ -35,8 +35,7 @@ use yii\helpers\ArrayHelper;
     <h2>Password</h2>
     <?= $form->field($model, 'password')->textInput(['maxlength' => 45]) ?>
     <?= $form->field($model, 'password_manager')->textInput(['maxlength' => 45]) ?>
-    <h2>Tax</h2>
-    <?= $form->field($model, 'tax_percent')->input('number', ['min' => 0]) ?>
+    
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
